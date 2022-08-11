@@ -12,6 +12,8 @@ tcp_port_tls=5141
 date_rfc3164=`date +"%b %d %H:%M:%S"`
 date_rfc5424=`date +"%FT%TZ"`
 
+grok_filter_log_file=logs/grok_filter_test.log
+
 run:
 	${docker_compose} up -d
 
@@ -42,3 +44,9 @@ log-tcp: log-tcp-rfc3164 log-tcp-rfc5424
 log-udp: log-udp-rfc3164 log-udp-rfc5424
 
 log-all: log-tcp log-udp
+
+log-grok:
+	echo "3 192.168.178.1 fritzbox.local Couldn't connect to 192.168.168.1 on port 443" >> ${grok_filter_log_file}
+
+clean-grok-log:
+	> logs/grok_filter_test.log
