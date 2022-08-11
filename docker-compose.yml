@@ -4,6 +4,7 @@ services:
     build: ./fluentd
     volumes:
       - ./fluentd/conf:/fluentd/etc
+      - ./logs:/logs
     links:
       - "opensearch"
     ports:
